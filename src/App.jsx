@@ -8,7 +8,7 @@ import { Outlet } from 'react-router-dom'
 
 
 function App() {
-  // console.log(import.meta.env.VITE_APPWRITE_PROJECT_ID);
+  // console.log(import.meta.env.VITE_APPWRITE_PROJECT_ID);------> import.meta (VITE)
   const [loading, setLoading] = useState(true)
   const dispatch = useDispatch()
 
