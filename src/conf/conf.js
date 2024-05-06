@@ -8,3 +8,6 @@ const conf = {
 
 
 export default conf
+
+
+//conf as obj it will export key-value pairs and value here is treated as String values bz of numbers

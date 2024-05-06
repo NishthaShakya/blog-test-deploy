@@ -14,12 +14,14 @@ export class Service{
         this.bucket = new Storage(this.client);
     }
 
+    //------------------------create document--------------------------------------------------
+
     async createPost({title, slug, content, featuredImage, status, userId}){
         try {
             return await this.databases.createDocument(
                 conf.appwriteDatabaseId,
                 conf.appwriteCollectionId,
-                slug,
+                slug, //here title as unique ID of document 
                 {
                     title,
                     content,
@@ -29,10 +31,11 @@ export class Service{
                 }
             )
         } catch (error) {
-            console.log("Appwrite serive :: createPost :: error", error);
+            console.log("Appwrite service :: createPost :: error", error);
         }
     }
-
+    
+   //-----------------------------updating document--------------------------------------------------- 
     async updatePost(slug, {title, content, featuredImage, status}){
         try {
             return await this.databases.updateDocument(
@@ -48,10 +51,10 @@ export class Service{
                 }
             )
         } catch (error) {
-            console.log("Appwrite serive :: updatePost :: error", error);
+            console.log("Appwrite service :: updatePost :: error", error);
         }
     }
-
+    //--------------------------delete document--------------------------------------------------
     async deletePost(slug){
         try {
             await this.databases.deleteDocument(
@@ -62,11 +65,11 @@ export class Service{
             )
             return true
         } catch (error) {
-            console.log("Appwrite serive :: deletePost :: error", error);
+            console.log("Appwrite service :: deletePost :: error", error);
             return false
         }
     }
-
+    //-------------------get document----------------------------------------------------------
     async getPost(slug){
         try {
             return await this.databases.getDocument(
@@ -76,7 +79,7 @@ export class Service{
             
             )
         } catch (error) {
-            console.log("Appwrite serive :: getPost :: error", error);
+            console.log("Appwrite service :: getPost :: error", error);
             return false
         }
     }
@@ -91,12 +94,12 @@ export class Service{
 
             )
         } catch (error) {
-            console.log("Appwrite serive :: getPosts :: error", error);
+            console.log("Appwrite service :: getPosts :: error", error);
             return false
         }
     }
 
-    // file upload service
+    //-----------------file upload----------------------------------------------------
 
     async uploadFile(file){
         try {
@@ -106,11 +109,11 @@ export class Service{
                 file
             )
         } catch (error) {
-            console.log("Appwrite serive :: uploadFile :: error", error);
+            console.log("Appwrite service :: uploadFile :: error", error);
             return false
         }
     }
-
+     //--------------------delete file------------------------------------------------
     async deleteFile(fileId){
         try {
             await this.bucket.deleteFile(
@@ -119,11 +122,11 @@ export class Service{
             )
             return true
         } catch (error) {
-            console.log("Appwrite serive :: deleteFile :: error", error);
+            console.log("Appwrite service :: deleteFile :: error", error);
             return false
         }
     }
-
+     //-----------------------file preview-------------------------------------------
     getFilePreview(fileId){
         return this.bucket.getFilePreview(
             conf.appwriteBucketId,

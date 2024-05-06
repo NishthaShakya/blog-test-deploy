@@ -10,24 +10,24 @@ function Header() {
 
   const navItems = [
     {
-      name: 'Home',
-      slug: "/",
-      active: true
+      name: 'Home',   //display name of nav item'home'
+      slug: "/", //route to which nav item links
+      active: true  //navitem must be active
     }, 
     {
       name: "Login",
       slug: "/login",
-      active: !authStatus,
+      active: !authStatus, //login activated when user is not logged in(not authenicated .i.e, not user not logged in)
   },
   {
       name: "Signup",
       slug: "/signup",
-      active: !authStatus,
+      active: !authStatus, //same
   },
   {
       name: "All Posts",
       slug: "/all-posts",
-      active: authStatus,
+      active: authStatus, //when user is authenticated
   },
   {
       name: "Add Post",
@@ -43,7 +43,7 @@ function Header() {
         <nav className='flex'>
           <div className='mr-4'>
             <Link to='/'>
-              <Logo width='70px'   />
+              <Logo width='50px'   />
 
               </Link>
           </div>
@@ -58,7 +58,7 @@ function Header() {
               </li>
             ) : null
             )}
-            {authStatus && (
+            {authStatus && (        //authstatus true
               <li>
                 <LogoutBtn />
               </li>

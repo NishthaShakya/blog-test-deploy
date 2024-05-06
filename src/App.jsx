@@ -9,8 +9,8 @@ import { Outlet } from 'react-router-dom'
 
 function App() {
   // console.log(import.meta.env.VITE_APPWRITE_PROJECT_ID);------> import.meta (VITE)
-  const [loading, setLoading] = useState(true)
-  const dispatch = useDispatch()
+  const [loading, setLoading] = useState(true) 
+  const dispatch = useDispatch() 
 
   useEffect(() => {
     authService.getCurrentUser()
@@ -26,7 +26,7 @@ function App() {
   
   return !loading ? (
 
-    <div className='m-0 p-0 flex flex-wrap content-between bg-indigo-300'>
+    <div className='m-0 p-0 flex flex-wrap content-around bg-indigo-300'>
       <div className='w-full block'>
         <Header />
         <main>

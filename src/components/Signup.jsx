@@ -15,6 +15,7 @@ function Signup() {
     const {register, handleSubmit,
         formState: { errors }
     } = useForm()
+   
 
     const create = async(data) => {
         setError("")
@@ -22,11 +23,30 @@ function Signup() {
             const userData = await authService.createAccount(data)
             if (userData) {
                 const userData = await authService.getCurrentUser()
+                console.log(userData);
                 if(userData) dispatch(login(userData));
                 navigate("/")
+                console.log(userData);
             }
         } catch (error) {
             setError(error.message)
+        }
+    }
+    
+    const handleVerification = async () => {
+        const urlParams = new URLSearchParams(window.location.search);
+        const secret = urlParams.get('secret');
+        const userId = urlParams.get('userId');
+
+        if (secret && userId) {
+            try {
+                await authService.updateVerification(userId, secret);
+                
+                alert("Email verification successful!");
+                navigate("/login");
+            } catch (error) {
+                setError(error.message);
+            }
         }
     }
 
@@ -60,7 +80,7 @@ function Signup() {
                         <label htmlFor='name' className=' mt-1 text-sm font-bold text-black/60 text-center'>Full Name</label>
                         <Input 
                         id= "name" 
-                        className="block w-full px-4 py-2 mt-1 text-sm text-gray-800 placeholder-gray-400 bg-white border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500 focus:ring focus:ring-indigo-200"
+                        // className="block w-full px-4 py-2 mt-1 text-sm text-gray-800 placeholder-gray-400 bg-white border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500 focus:ring focus:ring-indigo-200"
                         placeholder="Enter your full name"
                         {...register("name", {
                             required: true,
@@ -72,7 +92,7 @@ function Signup() {
                         <div className='flex flex-col'>
                         <label htmlFor="Email" className=' mt-1 text-sm font-bold text-black/60 text-center'>Email</label>
                         <Input
-                        className="block w-full px-4 py-2 mt-1 text-sm text-gray-800 placeholder-gray-400 bg-white border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500 focus:ring focus:ring-indigo-200"
+                        // className="block w-full px-4 py-2 mt-1 text-sm text-gray-800 placeholder-gray-400 bg-white border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500 focus:ring focus:ring-indigo-200"
                         id="Email"
                         placeholder="Enter your email"
                         type="email"

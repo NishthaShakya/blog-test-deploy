@@ -1,10 +1,10 @@
-import React, {useState} from 'react'
-import {Link, useNavigate} from 'react-router-dom'
-import { login as authLogin } from '../store/authSlice'
-import {Button, Input, Logo} from "./index"
-import {useDispatch} from "react-redux"
+import React, {useState} from 'react';
+import {Link, useNavigate} from 'react-router-dom';
+import { login as authLogin } from '../store/authSlice';
+import {Button, Input, Logo} from "./index";
+import {useDispatch} from "react-redux";
 import authService from "../appwrite/auth"
-import {useForm} from "react-hook-form"
+import {useForm} from "react-hook-form";
 import { FaEye,FaEyeSlash } from "react-icons/fa";
 
 function Login() {
@@ -20,8 +20,10 @@ function Login() {
             const session = await authService.login(data)
             if (session) {
                 const userData = await authService.getCurrentUser()
+                console.log(userData);
                 if(userData) dispatch(authLogin(userData));
                 navigate("/")
+                
             }
         } catch (error) {
             setError(error.message)
@@ -56,7 +58,7 @@ function Login() {
             <div className='flex flex-col'>
                         <label htmlFor="Email" className=' mt-1 text-sm font-bold text-black/60 text-center'>Email</label>
                         <Input
-                        className="block w-full px-4 py-2 mt-1 text-sm text-gray-800 placeholder-gray-400 bg-white border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500 focus:ring focus:ring-indigo-200"
+                        // className="block w-full px-4 py-2 mt-1 text-sm text-gray-800 placeholder-gray-400 bg-white border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500 focus:ring focus:ring-indigo-200"
                         id="Email"
                         placeholder="Enter your email"
                         type="email"
@@ -76,7 +78,7 @@ function Login() {
                         <div className='relative'>
                         <label htmlFor="Password" className=' mt-1 text-sm font-bold text-black/60 text-center'>Password</label>
                         <Input
-                        className="block align-items justify-content w-full px-4 py-2 mt-1 text-sm text-gray-800 placeholder-gray-400 bg-white border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500 focus:ring focus:ring-indigo-200"
+                        // className="block align-items justify-content w-full px-4 py-2 mt-1 text-sm text-gray-800 placeholder-gray-400 bg-white border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500 focus:ring focus:ring-indigo-200"
                         id="Password"
                         type={showPassword ? "text" : "password"}
                         placeholder="Enter your password"
